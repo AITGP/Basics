@@ -16,9 +16,9 @@ Este repositorio está lleno de código que ayuda a nuestro dia a dia en el mund
 
 ## Content
 1. Querys
-    1.Super Query.sql: Searches within an oracle database all portions of a code that is determined by parameters. Include the pages within the oracle application express (APEX) environment
-    2.Dependencias.sql: Look for "Constraints" of a table determined by parameters.
-    3.Update Update Property Item Apex.sql: Updates a property (attributes) of a specific ITEM type within the Oracle Application Express (APEX) ecosystem.
+    1. Super Query.sql: Searches within an oracle database all portions of a code that is determined by parameters. Include the pages within the oracle application express (APEX) environment
+    2. Dependencias.sql: Look for "Constraints" of a table determined by parameters.
+    3. Update Update Property Item Apex.sql: Updates a property (attributes) of a specific ITEM type within the Oracle Application Express (APEX) ecosystem.
 
 2. ACL: Configure the Access Control List in an Oracle database and for APEX. Necessary to be able to send emails from APEX.
 3. Ireports con PLSQL: Ireports with PLSQL: Execute a dynamic query from a database procedure in Ireports - Jaspersoft
