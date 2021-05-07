@@ -18,7 +18,7 @@ Este repositorio está lleno de código que ayuda a nuestro dia a dia en el mund
 1. Querys
     1. Super Query.sql: Searches within an oracle database all portions of a code that is determined by parameters. Include the pages within the oracle application express (APEX) environment
     2. Dependencias.sql: Look for "Constraints" of a table determined by parameters.
-    3. Update Update Property Item Apex.sql: Updates a property (attributes) of a specific ITEM type within the Oracle Application Express (APEX) ecosystem.
+    3. Update Property Item Apex.sql: Updates a property (attributes) of a specific ITEM type within the Oracle Application Express (APEX) ecosystem.
 
 2. ACL: Configure the Access Control List in an Oracle database and for APEX. Necessary to be able to send emails from APEX.
 3. Ireports con PLSQL: Ireports with PLSQL: Execute a dynamic query from a database procedure in Ireports - Jaspersoft
@@ -28,7 +28,7 @@ Este repositorio está lleno de código que ayuda a nuestro dia a dia en el mund
 1. Querys
     1. Super Query.sql: Busca dentro de una base de datos oracle todas las porciones de un codigo que se determina por parametros. Incluye las paginas dentro del ambiente de oracle application express (APEX).
     2. Dependencias.sql: Busca los "Constraints" de una tabla determinada por parametros. 
-    3. Update Update Property Item Apex.sql: Actualiza una propiedad (atributos) de un tipo de ITEM especifico dentro del ecosistema de Oracle Application Express (APEX)
+    3. Update Property Item Apex.sql: Actualiza una propiedad (atributos) de un tipo de ITEM especifico dentro del ecosistema de Oracle Application Express (APEX)
 2. ACL: Configurar el Access Control List en una base de datos Oracle y para el APEX. Necesario para poder enviar correos desde APEX.
 3. Ireports con PLSQL: Ejecutar un query dinamico a partir de un procedimiento de base de datos en Ireports - Jaspersoft
 4. Reportes en Word - APEX: Crear documentos de Office Word dinamicos desde APEX, por medio el plug-in de AmandaDocxDataSourceBuilder.
