@@ -9,6 +9,7 @@ This repository is full of code that helps our day to day in the world of softwa
 
 Somos una compañia panameña que se dedica al desarrollo de software.
 Este repositorio está lleno de código que ayuda a nuestro dia a dia en el mundo del desarrollo de software.
+![image](https://user-images.githubusercontent.com/64084293/117481966-56389200-af29-11eb-8681-2dad23d05089.png)
 
 ## Content
 1. Querys
