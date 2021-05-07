@@ -4,12 +4,15 @@ PL/SQL Basic Documents
 Documentos Basicos De PL/SQL
 
 ## AITGP 
-We are a Panamanian company dedicated to software development.
+We are a Panamanian ![image](https://user-images.githubusercontent.com/64084293/117482103-897b2100-af29-11eb-8565-e58d9ffeb334.png)
+ company dedicated to software development.
 This repository is full of code that helps our day to day in the world of software development.
 
-Somos una compañia panameña que se dedica al desarrollo de software.
+Somos una compañia panameña ![image](https://user-images.githubusercontent.com/64084293/117482109-8bdd7b00-af29-11eb-95be-36bba9841040.png)
+que se dedica al desarrollo de software.
 Este repositorio está lleno de código que ayuda a nuestro dia a dia en el mundo del desarrollo de software.
-![image](https://user-images.githubusercontent.com/64084293/117481966-56389200-af29-11eb-8681-2dad23d05089.png)
+
+
 
 ## Content
 1. Querys
