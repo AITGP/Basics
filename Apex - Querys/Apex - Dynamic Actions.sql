@@ -1,3 +1,7 @@
+--FECHA EN PL/SQL EN FORMATO DE MES EN ESPANOL
+TO_CHAR(SYSDATE,'DD/Month/YYYY','NLS_DATE_LANGUAGE = Spanish')
+--HTML PARA AGREGAR IMAGENES DE SHARED COMPONENTS EN LOS REPORTES
+<img src="#WORKSPACE_IMAGES#print-icon.png"></img>
 
 --javasctipt para ejecutar un PL/SQL desde un reporte
 --#REFERENCIA_ID# Primary Key del reporte
