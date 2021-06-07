@@ -54,3 +54,13 @@ FROM DUAL
 --Link Attributes
 class="#CSS_TYPE#"
 
+---------------------------------------------------------
+--DYNAMIC ACTION PARA ABRIR UN MODAL PAGE 
+--CREAR ITEM CON URL 
+--P1_URL
+--Source: PL/SQL Expression
+apex_util.prepare_url('f?p=&APP_ID.:#PAGE_ID#:&SESSION.::&DEBUG.::#PAGE_ITEMS#:#PAGE_VALUES#:', p_triggering_element => '$(''#is-active'')')
+
+--En el true action del dynamic action que va a abrir el modal 
+--Execute Javascript Code
+eval($('#P1_URL').val())
