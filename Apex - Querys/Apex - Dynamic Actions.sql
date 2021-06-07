@@ -47,3 +47,8 @@ FROM DUAL
 <style type="text/css">
   .hidden_link { display: none; }
 </style>
+
+--EN LA COLUMNA QUE SE QUIERE OCULTAR 
+--Column Formatting
+--CSS Classes
+hidden_link
