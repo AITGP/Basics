@@ -43,7 +43,7 @@ case when COLUMN_NAME = 'SI' then
 end CSS_TYPE
 FROM DUAL
 --CSS INLINE
---CSS QUE OCULTA UN REFISTRO 
+--CSS QUE OCULTA UN REGISTRO 
 <style type="text/css">
   .hidden_link { display: none; }
 </style>
