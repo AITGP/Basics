@@ -1,0 +1,7 @@
+Paso a paso para solucionar el bug de los items que se ocultan
+
+1. Subir archivo css en los componentes compartidos > Files > "Static Workspace Files"
+2. Copiar la referencia del archivo subido
+3. Ir a User interface > Themes 
+4. Seleccionar el themes y luego seleccionar la pestaña de "Styles"
+5. Escoge el tema que esta usando la aplicacion y luego pegar la referencia en File URLs

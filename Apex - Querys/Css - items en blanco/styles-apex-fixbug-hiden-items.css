@@ -1,0 +1,7 @@
+.apex-item-select,
+.apex-item-text,
+.apex-textarea,
+.apex-item-multi {
+  backface-visibility: hidden !important;
+}
+
