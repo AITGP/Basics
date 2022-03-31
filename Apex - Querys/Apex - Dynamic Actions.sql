@@ -64,3 +64,13 @@ apex_util.prepare_url('f?p=&APP_ID.:#PAGE_ID#:&SESSION.::&DEBUG.::#PAGE_ITEMS#:#
 --En el true action del dynamic action que va a abrir el modal 
 --Execute Javascript Code
 eval($('#P1_URL').val())
+
+
+--Dynamic Action para prevenir que la pagina envie el error de re-submitted
+--Dynamic action 
+-- Before PAge Submit
+
+--Action
+--Javascript Code
+$("body").append('<div class="ui-widget-overlay ui-front"/>');
+apex.widget.waitPopup();
