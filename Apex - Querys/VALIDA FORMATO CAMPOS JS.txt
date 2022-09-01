@@ -1,6 +1,6 @@
-ITEM
-	ADVANCED 
-		CUSTOM ATTRIBUTES
+--ITEM
+	--ADVANCED 
+		--CUSTOM ATTRIBUTES
 		
 MONTO - NUMBER
 onkeypress="return (event.charCode == 46) || (event.charCode > 47 && event.charCode < 58)"
