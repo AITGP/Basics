@@ -8,10 +8,7 @@ onkeypress="return (event.charCode == 46) || (event.charCode > 47 && event.charC
 CUENTAS
 onkeypress="return (event.charCode > 47 && event.charCode < 58)"
 
-NOMBRE
-style="text-transform:uppercase" onkeypress="return (event.charCode == 32) || (event.charCode == 46) || (event.charCode > 47 && event.charCode < 58) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
-
-DESCRIPCION 
+NOMBRE - DESCRIPCION
 style="text-transform:uppercase" onkeypress="return (event.charCode == 32) || (event.charCode == 46) || (event.charCode > 47 && event.charCode < 58) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
 
 CORREO 
