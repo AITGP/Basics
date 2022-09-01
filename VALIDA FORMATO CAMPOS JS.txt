@@ -1,0 +1,18 @@
+ITEM
+	ADVANCED 
+		CUSTOM ATTRIBUTES
+		
+MONTO - NUMBER
+onkeypress="return (event.charCode == 46) || (event.charCode > 47 && event.charCode < 58)"
+
+CUENTAS
+onkeypress="return (event.charCode > 47 && event.charCode < 58)"
+
+NOMBRE
+style="text-transform:uppercase" onkeypress="return (event.charCode == 32) || (event.charCode == 46) || (event.charCode > 47 && event.charCode < 58) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+
+DESCRIPCION 
+style="text-transform:uppercase" onkeypress="return (event.charCode == 32) || (event.charCode == 46) || (event.charCode > 47 && event.charCode < 58) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+
+CORREO 
+style="text-transform:lowercase" onkeypress="return (event.charCode == 32) || (event.charCode == 45) || (event.charCode == 46)|| (event.charCode == 64) || (event.charCode == 95)  || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode > 47 && event.charCode < 58)"
