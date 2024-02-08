@@ -1,0 +1,33 @@
+DECLARE
+  l_file      UTL_FILE.FILE_TYPE;
+  l_buffer    RAW(32767);
+  l_amount    BINARY_INTEGER := 32767;
+  l_pos       INTEGER := 1;
+  l_blob      BLOB;
+  l_blob_len  INTEGER;
+ 
+  src_lob bfile;
+  cursor imagenes is  
+    select dgr_datgeneralesid as sysid, lpad(dgr_numaso,8,'0')||'.jpg'  as NAMEFOTO from datgenrelacion
+where dgr_numaso is not null and dgr_tipoas = 'AS';
+--and dgr_datgeneralesid >0 and dgr_datgeneralesid <= 100;
+BEGIN
+ delete  ECOOPMULTIMEDIA.fotos;
+    for i in imagenes loop
+      begin
+       -- select dgr_datgeneralesid into sysid from datgenrelacion where dgr_numaso = i.dgr_numaso and dgr_tipoas = 'AS';
+         src_lob := bfilename('FOTOS',i.NAMEFOTO);  ---FOTOS directorio virtual de oracle
+         insert into ECOOPMULTIMEDIA.fotos ( photo, filename, mimetype, last_update_date, pht_datgeneralesid)
+         values ( EMPTY_BLOB(), i.NAMEFOTO, 'image/jpeg', sysdate, i.sysid)
+         RETURNING photo into l_blob;
+   
+         dbms_lob.open(src_lob, dbms_lob.LOB_READONLY);
+         dbms_lob.LoadFromFile( l_blob,  src_lob, dbms_lob.getlength(src_lob) );
+         dbms_lob.close(src_lob);
+         commit;
+        exception when others then
+          dbms_lob.close(src_lob);
+          null;
+    end;
+     end loop;
+END;

@@ -7,6 +7,9 @@ TO_CHAR(SYSDATE,'DD/Month/YYYY','NLS_DATE_LANGUAGE = Spanish')
 --#REFERENCIA_ID# Primary Key del reporte
 javascript:$.event.trigger('CUSTOM_JAVASCRIPT','#REFERENCIA_ID#');
 
+--Custom Attributes =  
+style="pointer-events: none;" 
+--para bloquear listar de valores llamado por Dynamic actions
 
 --dynamic action
 --Custom Event: CUSTOM_JAVASCRIPT
