@@ -1,0 +1,3 @@
+cd /backup/packageencrypt/
+wrap iname=package.sql oname=packagewrapped.sql
+wrap iname=package body.sql oname=packagebodywrapped.sql
