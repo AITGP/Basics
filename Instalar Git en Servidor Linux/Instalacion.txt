@@ -1,0 +1,45 @@
+#ir a la carpeta tmp 
+cd /tmp
+
+#copiar la version de git mas actualizada
+
+#descomprimir
+tar -xzf git-2.47.3.tar.gz
+cd git-2.47.3
+
+# Compilar e instalar
+make configure
+./configure --prefix=/usr/local
+make all
+sudo make install
+
+# Agregar al PATH si es necesario
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+
+#Verificar si se instalo bien
+git --version
+
+# Configuración inicial (reemplaza con tus datos)
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu.email@empresa.com"
+git config --global --add safe.directory /tmp/mi-proyecto-prueba/.git
+
+# Ver configuración
+git config --list
+
+#OPCIONAL SOLO SI SE QUIERE VALIDAR QUE FUNCIONA
+# Crear directorio para el proyecto
+mkdir mi-proyecto-prueba
+cd mi-proyecto-prueba
+
+# Inicializar repositorio Git
+git init
+
+# Verificar que se creó correctamente
+ls -la  # Verás una carpeta .git
+
+
+#Si se quiere clonar localmente
+git clone usuario@ip_servidor:/tmp/mi-proyecto-prueba/ mi-proyecto-local
