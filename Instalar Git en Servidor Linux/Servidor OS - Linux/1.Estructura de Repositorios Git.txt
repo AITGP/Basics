@@ -1,0 +1,46 @@
+# en tu servidor Linux -- creacion del repositorio bare
+mkdir -p /backup/git_respaldo/repositorio_sql.git
+cd /backup/git_respaldo/repositorio_sql.git
+git init --bare
+
+
+#Repositorio Normal de Working
+mkdir -p /backup/git_respaldo/repositorio_sql
+cd /backup/git_respaldo/repositorio_sql
+git init
+
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+
+#Conectar el normal con el bare
+#Configuras el bare como remoto origin del repo normal:
+
+cd /backup/git_respaldo/repositorio_sql
+git remote add origin /backup/git_respaldo/repositorio_sql.git
+
+
+#Inicializar el repositorio
+cd /backup/git_respaldo/repositorio_sql
+
+#Copiar el README.md
+
+#Inicializar el primer commit
+git add .
+git commit -m "Primer commit: inicialización"
+git push origin master
+
+#Crear estructura de auditoria
+mkdir -p /backup/git_respaldo/repositorio_sql/PAQUETES
+mkdir -p /backup/git_respaldo/repositorio_sql/PAQUETES_BODY
+mkdir -p /backup/git_respaldo/repositorio_sql/PROCEDURES
+mkdir -p /backup/git_respaldo/repositorio_sql/FUNCTIONS
+mkdir -p /backup/git_respaldo/repositorio_sql/VIEWS
+mkdir -p /backup/git_respaldo/repositorio_sql/TRIGGERS
+mkdir -p /backup/git_respaldo/repositorio_sql/OTROS
+
+chown -R oracle:oinstall /backup/git_respaldo/repositorio_sql/
+chmod -R 775 /backup/git_respaldo/repositorio_sql/
+
+
+
