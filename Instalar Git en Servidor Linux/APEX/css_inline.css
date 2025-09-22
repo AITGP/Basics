@@ -1,0 +1,41 @@
+/* Contenedor del diff */
+.diff-container {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    white-space: pre;          /* mantener saltos de línea tal cual */
+    background-color: #f9f9f9; /* fondo claro */
+    color: #333333;            /* texto por defecto */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    line-height: 1.4em;
+    font-size: 13px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Líneas añadidas */
+.diff-container .added {
+    background-color: #e6f4ea;  /* verde suave */
+    color: #2a7f4e;             /* verde oscuro legible */
+    padding: 0 4px;
+    border-left: 3px solid #2a7f4e;
+    border-radius: 3px;
+    display: inline;            /* evita saltos extra */
+}
+
+/* Líneas eliminadas */
+.diff-container .removed {
+    background-color: #fdecea;  /* rojo suave */
+    color: #c9302c;             /* rojo oscuro legible */
+    padding: 0 4px;
+    border-left: 3px solid #c9302c;
+    border-radius: 3px;
+    display: inline;            /* evita saltos extra */
+}
+
+/* Líneas de contexto */
+.diff-container .context {
+    color: #555555;             /* gris medio */
+    padding: 0 4px;
+    display: inline;            /* evita saltos extra */
+}
