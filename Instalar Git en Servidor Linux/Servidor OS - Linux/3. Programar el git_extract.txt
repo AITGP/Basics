@@ -1,0 +1,16 @@
+#Copiar archivo git_extract.sh
+#Darle permisos de ejecucion
+chmod +x git_extract.sh
+
+#Convertir a unix
+dos2unix git_extract.sh
+
+
+#Copiar archivo git_to_oracle.py
+#En la carpeta principal crear un nuevo entorno
+python3 -m venv .venv
+. .venv/bin/activate
+
+#Instalar la libreria necesaria #esta es para python 3.4
+pip install cx_Oracle-6.0-cp34-cp34m-manylinux1_x86_64.whl
+

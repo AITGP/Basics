@@ -1,0 +1,23 @@
+#Copiar el autopush
+
+#Darle permisos
+chmod +x /backup/git_respaldo/auto_push.sh
+
+
+#Convertir en unix
+dos2unix auto_push.sh
+
+#Abrir el crontab
+crontab -e
+
+#Ubicar el git 
+which git
+#Modificar en el .sh la ubicacion del git
+# Ej. /usr/bin/git add .
+
+
+#Agregar el job
+#En vim primero "i" para actualizar
+*/30 * * * * /backup/git_respaldo/auto_push.sh >> /backup/git_respaldo/auto_push.log 2>&1
+
+#En vim para guardar "Esc" + ":wq"

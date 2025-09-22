@@ -43,3 +43,9 @@ ls -la  # Verás una carpeta .git
 
 #Si se quiere clonar localmente
 git clone usuario@ip_servidor:/tmp/mi-proyecto-prueba/ mi-proyecto-local
+
+#Trae los cambios si ya esta clonado
+git fetch origin
+
+#Actualiza internamente
+git pull origin master
