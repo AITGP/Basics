@@ -105,16 +105,15 @@ def parse_diffs(cur):
             line = line.rstrip("\n")
 
             if line.startswith("---") and not line.startswith("--- a/"):
-                # Guardar diff anterior
+                # Guardar diff anterior sin truncar
                 if commit_id and current_file and diff_lines:
                     diff_text = "".join(diff_lines)
-                    if len(diff_text) > 4000:
-                        diff_text = diff_text[:3900] + "\n... (truncado)"
                     cur.execute("""
                         INSERT INTO GIT_DIFFS (commit_id, filename, diff_text)
                         VALUES (:1, :2, :3)
                     """, (commit_id, current_file, diff_text))
                     diff_count += 1
+
                 commit_id = line[3:].strip()
                 current_file = None
                 diff_lines = []
