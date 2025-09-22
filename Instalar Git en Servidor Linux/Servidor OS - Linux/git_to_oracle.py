@@ -101,66 +101,101 @@ def parse_diffs(cur):
         print("Error: No se pudo leer el archivo diffs.log con ningun encoding")
         return
 
+    commit_re = re.compile(r'^---\s*([0-9a-fA-F]{7,40})$')
+    diff_git_re = re.compile(r'^diff --git a/(.+?) b/(.+)$')
+
     commit_id = None
     current_file = None
     diff_lines = []
 
-    for line_num, line in enumerate(file_content, 1):
+    for line_num, raw_line in enumerate(file_content, 1):
         try:
-            line = line.rstrip("\n")
+            line = raw_line.rstrip("\r\n")
 
-            if line.startswith("---") and not line.startswith("--- a/"):
-                # Guardar diff anterior sin truncar usando MERGE
+            # 1) Nuevo commit
+            m_commit = commit_re.match(line)
+            if m_commit:
+                # Guardar diff anterior si existe
                 if commit_id and current_file and diff_lines:
                     diff_text = "".join(diff_lines)
-                    cur.execute("""
-                        MERGE INTO GIT_DIFFS t
-                        USING (SELECT :1 AS commit_id, :2 AS filename, :3 AS diff_text FROM dual) src
-                        ON (t.commit_id = src.commit_id AND t.filename = src.filename)
-                        WHEN NOT MATCHED THEN
-                            INSERT (commit_id, filename, diff_text)
-                            VALUES (src.commit_id, src.filename, src.diff_text)
-                    """, (commit_id, current_file, diff_text))
-                    diff_count += 1
+                    try:
+                        insert_diff(cur, commit_id, current_file, diff_text)
+                        diff_count += 1
+                    except Exception as e:
+                        print("Error insertando diff (commit={}, file={}): {}".format(commit_id, current_file, e))
 
-                commit_id = line[3:].strip()
+                # Iniciar nuevo commit
+                commit_id = m_commit.group(1)
                 current_file = None
                 diff_lines = []
+                continue
 
-            elif line.startswith("diff --git"):
-                match = re.search(r'b/(.+)$', line)
-                if match:
-                    current_file = match.group(1)
-                    diff_lines = [line + "\n"]
+            # 2) Nuevo archivo (diff --git)
+            m_diff = diff_git_re.match(line)
+            if m_diff:
+                # Guardar diff anterior antes de iniciar otro
+                if commit_id and current_file and diff_lines:
+                    diff_text = "".join(diff_lines)
+                    try:
+                        insert_diff(cur, commit_id, current_file, diff_text)
+                        diff_count += 1
+                    except Exception as e:
+                        print("Error insertando diff (commit={}, file={}): {}".format(commit_id, current_file, e))
 
-            elif line.startswith("+++ b/"):
+                a_file = m_diff.group(1).strip()
+                b_file = m_diff.group(2).strip()
+                chosen_file = b_file if b_file != '/dev/null' else a_file
+                current_file = chosen_file
+                diff_lines = [line + "\n"]
+                continue
+
+            # 3) Ajuste de filename con +++ b/...
+            if line.startswith("+++ b/"):
                 current_file = line[6:].strip()
                 diff_lines.append(line + "\n")
+                continue
 
-            elif commit_id and current_file:
+            # 4) Si estamos dentro de un archivo, acumular lineas
+            if current_file is not None:
                 diff_lines.append(line + "\n")
 
         except Exception as e:
             print("Error procesando linea {}: {}".format(line_num, e))
             continue
 
-    # Guardar ultimo diff
+    # Guardar el último diff
     if commit_id and current_file and diff_lines:
         try:
             diff_text = "".join(diff_lines)
-            cur.execute("""
-                MERGE INTO GIT_DIFFS t
-                USING (SELECT :1 AS commit_id, :2 AS filename, :3 AS diff_text FROM dual) src
-                ON (t.commit_id = src.commit_id AND t.filename = src.filename)
-                WHEN NOT MATCHED THEN
-                    INSERT (commit_id, filename, diff_text)
-                    VALUES (src.commit_id, src.filename, src.diff_text)
-            """, (commit_id, current_file, diff_text))
+            insert_diff(cur, commit_id, current_file, diff_text)
             diff_count += 1
         except Exception as e:
-            print("Error insertando último diff: {}".format(e))
+            print("Error insertando último diff (commit={}, file={}): {}".format(commit_id, current_file, e))
 
     print("Diffs procesados: {}".format(diff_count))
+
+def insert_diff(cur, commit_id, current_file, diff_text):
+    # Verificar si ya existe
+    cur.execute("""
+        SELECT 1 FROM GIT_DIFFS 
+        WHERE commit_id = :commit_id AND filename = :filename
+    """, {
+        "commit_id": commit_id,
+        "filename": current_file
+    })
+    exists = cur.fetchone()
+
+    if not exists:
+        # Forzar a que diff_text sea tratado como CLOB
+        cur.setinputsizes(diff_text=cx_Oracle.CLOB)
+        cur.execute("""
+            INSERT INTO GIT_DIFFS (commit_id, filename, diff_text)
+            VALUES (:commit_id, :filename, :diff_text)
+        """, {
+            "commit_id": commit_id,
+            "filename": current_file,
+            "diff_text": diff_text
+        })
 
 
 def main():
