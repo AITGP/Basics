@@ -1,4 +1,8 @@
 #!/bin/bash
+export ORACLE_HOME=/oracle/product/19cR3/db
+export LD_LIBRARY_PATH=$ORACLE_HOME:$LD_LIBRARY_PATH
+export PATH=$ORACLE_HOME:$PATH
+
 # -------------------------------
 # Paso 1: Commit y push al repositorio
 # -------------------------------
