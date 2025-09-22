@@ -61,7 +61,7 @@ BEGIN
             END;
 
         -- Nombre de archivo
-        l_fname := r.name || '.sql';
+        l_fname := r.owner||'_'||r.name || '.sql';
 
         -- Abrir archivo en la subcarpeta (ejemplo: /opt/oracle/repositorio_sql/PAQUETES/NOMBRE.sql)
         l_file := UTL_FILE.fopen(l_dir,  l_fname, 'w', 32767);

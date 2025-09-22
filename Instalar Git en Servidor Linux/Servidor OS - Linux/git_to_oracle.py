@@ -63,16 +63,21 @@ def parse_files(cur):
                 if len(parts) == 2:
                     status, filename = parts
                     try:
+                        # MERGE para insertar solo si no existe commit_id + filename
                         cur.execute("""
-                            INSERT INTO GIT_FILES (commit_id, status, filename)
-                            VALUES (:1, :2, :3)
-                        """, (commit_id, status, filename))
+                            MERGE INTO GIT_FILES t
+                            USING (SELECT :1 AS commit_id, :2 AS filename, :3 AS status FROM dual) src
+                            ON (t.commit_id = src.commit_id AND t.filename = src.filename)
+                            WHEN NOT MATCHED THEN
+                                INSERT (commit_id, status, filename)
+                                VALUES (src.commit_id, src.status, src.filename)
+                        """, (commit_id, filename, status))
                         file_count += 1
                     except Exception as e:
                         print("Error insertando archivo en línea {}: {}".format(line_num, e))
                 elif line and not line.startswith("Date:") and not line.startswith("Author:"):
                     print("Línea {} formato inesperado: {}...".format(line_num, line[:50]))
-    
+
     print("Archivos procesados: {}".format(file_count))
 
 def parse_diffs(cur):
@@ -105,12 +110,16 @@ def parse_diffs(cur):
             line = line.rstrip("\n")
 
             if line.startswith("---") and not line.startswith("--- a/"):
-                # Guardar diff anterior sin truncar
+                # Guardar diff anterior sin truncar usando MERGE
                 if commit_id and current_file and diff_lines:
                     diff_text = "".join(diff_lines)
                     cur.execute("""
-                        INSERT INTO GIT_DIFFS (commit_id, filename, diff_text)
-                        VALUES (:1, :2, :3)
+                        MERGE INTO GIT_DIFFS t
+                        USING (SELECT :1 AS commit_id, :2 AS filename, :3 AS diff_text FROM dual) src
+                        ON (t.commit_id = src.commit_id AND t.filename = src.filename)
+                        WHEN NOT MATCHED THEN
+                            INSERT (commit_id, filename, diff_text)
+                            VALUES (src.commit_id, src.filename, src.diff_text)
                     """, (commit_id, current_file, diff_text))
                     diff_count += 1
 
@@ -132,18 +141,20 @@ def parse_diffs(cur):
                 diff_lines.append(line + "\n")
 
         except Exception as e:
-            print("Error procesando linea {}: {}".format(line_num,e))
+            print("Error procesando linea {}: {}".format(line_num, e))
             continue
 
     # Guardar ultimo diff
     if commit_id and current_file and diff_lines:
         try:
             diff_text = "".join(diff_lines)
-            if len(diff_text) > 4000:
-                diff_text = diff_text[:3900] + "\n... (truncado)"
             cur.execute("""
-                INSERT INTO GIT_DIFFS (commit_id, filename, diff_text)
-                VALUES (:1, :2, :3)
+                MERGE INTO GIT_DIFFS t
+                USING (SELECT :1 AS commit_id, :2 AS filename, :3 AS diff_text FROM dual) src
+                ON (t.commit_id = src.commit_id AND t.filename = src.filename)
+                WHEN NOT MATCHED THEN
+                    INSERT (commit_id, filename, diff_text)
+                    VALUES (src.commit_id, src.filename, src.diff_text)
             """, (commit_id, current_file, diff_text))
             diff_count += 1
         except Exception as e:
