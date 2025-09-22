@@ -18,3 +18,7 @@ CREATE TABLE ecoopauditoria.GIT_DIFFS (
     filename VARCHAR2(500),
     diff_text CLOB 
 );
+
+GRANT SELECT ON  ecoopauditoria.GIT_FILES TO ECOOPDESA;
+GRANT SELECT ON  ecoopauditoria.GIT_DIFFS TO ECOOPDESA;
+GRANT SELECT ON   ecoopauditoria.GIT_COMMITS TO ECOOPDESA;
