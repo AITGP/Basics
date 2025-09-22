@@ -5,24 +5,8 @@ Este repositorio contiene backups de auditoría de los objetos auditables de la 
 ---
 
 ## 📋 Contenido
-
-El repositorio está organizado por fecha, con una carpeta para cada día en que se realizó un backup. Cada carpeta de fecha contiene archivos `.sql` que representan el estado de los objetos auditados en ese momento.
-
-```
-
-/
-├── 2025-09-15/
-│   ├── auditoria\_tablas.sql
-│   ├── auditoria\_vistas.sql
-│   └── auditoria\_procedimientos.sql
-├── 2025-09-16/
-│   ├── auditoria\_tablas.sql
-│   ├── auditoria\_vistas.sql
-│   └── auditoria\_procedimientos.sql
-└── README.md
-
-```
----
+BBDD - estan todos los scripts que se deben correr a nivel de base de datos.
+Servidor OS - Linux  - estan todos los comandos que se deberian ejecutar en el servidor.
 
 ## 🚀 Uso
 
@@ -35,17 +19,17 @@ Este repositorio es de **solo lectura**. Su objetivo principal es servir como un
 
 ## ⚙️ Proceso de Generación
 
-Los archivos de auditoría se generan automáticamente a través de un script programado que se ejecuta diariamente. Este script se conecta a la base de datos de producción, extrae las definiciones de los objetos (usando herramientas como `mysqldump` para MySQL o `pg_dump` para PostgreSQL) y luego sube los cambios a este repositorio.
+Los archivos de auditoría se generan automáticamente a través de un script programado que se ejecuta diariamente. Este script se conecta a la base de datos de producción, extrae las definiciones de los objetos y luego sube los cambios a este repositorio.
 
 * **Script de Backup:** `backup_auditoria.sh`
 * **Frecuencia:** Diariamente a las 2:00 AM.
 * **Objetos Auditados:** Todas las tablas, vistas, funciones y procedimientos almacenados.
 
 ---
+## Ejemplo
+![](https://github.com/AITGP/Basics/blob/master/Instalar%20Git%20en%20Servidor%20Linux/Git_Oracle_Apex.gif)
 
 ## ⚠️ Advertencia
-
-**No hagas cambios directamente en este repositorio.** Cualquier modificación manual podría desincronizar el historial de auditoría y se sobrescribirá en el próximo backup automático.
 
 Para cualquier duda o problema, contacta con el administrador de la base de datos.
 ```
